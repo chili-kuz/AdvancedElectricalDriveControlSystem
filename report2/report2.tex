@@ -57,29 +57,64 @@ Assignment (2016/05/13)\\
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%
-\section*{問題}
+\section{問題}
 %%%%%%%%%%%%%%%%%%%%%%%%
-Design a DC speed control system, and show demonstrations for the four quadrant operation.
+DCモータの速度制御系を設計し，４象限運転を実行せよ．ただし，DCモータのパ
+ラメータを表\ref{table:DC_dim}に示す．
 %
 \begin{table}[h]
  \centering
- \caption{DC motor dimension}
+ \caption{DCモータのパラメータ}
  \label{table:DC_dim}
  \begin{tabular}{c|c|c} \hline
-  名前& 記号& 数値\\\hline
-  Rated Power [kW]              &$P$&150  \\\hline
-  Rated Voltage [V]             &$V$&450  \\\hline
-  Armature resistance [$\Omega$]&$R_a$& 0.15 \\\hline
-  Armature inductance [H]       &$L_a$&0.003\\\hline
-  Moment of inerria [kg$\rm {m^3}$] &$J$&150  \\\hline
-  Emf constant [Vs/rad]       &$K_E$&8.50 \\\hline
-  Base speed [rpm]            &$\omega$&500  \\\hline
+  名称 [単位]                    & 記号  & 数値\\\hline
+  定格電力 [kW]                  &$P$    &150  \\\hline
+  定格電圧 [V]                   &$V$    &450  \\\hline
+  電機子抵抗 [$\Omega$]          &$R_a$  & 0.15 \\\hline
+  電機子インダクタンス [H]        &$L_a$   &0.003\\\hline
+  慣性モーメント [kg$\rm {m^3}$] &$J$     &150  \\\hline
+  誘起電圧定数 [V$\cdot$s/rad]    &$K_E$   &8.50 \\\hline
+  基底速度 [rpm]                &$\omega$&500  \\\hline
  \end{tabular}
 \end{table}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%
-\section{}
+\section{コントローラの設計}
 %%%%%%%%%%%%%%%%%%%%%%%%
-はじめにDCモータのブロック線図を時に示す．
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{DCモータ}
+%%%%%%%%%%%%%%%%%%%%%%%
+はじめに，本レポートで用いるDCモータのブロック線図を図\ref{fig:DC_model}に示す．
+%
+\begin{figure}[htbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/DC_model.eps}
+ \end{center}
+ \caption{DCモータのブロック線図}
+ \label{fig:DC_model}
+\end{figure}
+%
+はじめに，図\ref{fig:DC_model}に示すDCモータのモデルの伝達特性を導出する．
+図\ref{fig:DC_model}より
+%
+\begin{equation}
+ \Omega_m(s)=\frac{1}{Js}\left\{\frac{K_T}{R_{a}+L_{a}s}(V-K_E\Omega_m)-T_L\right\}
+\end{equation}
+と表され，式変形すると，
+\begin{equation*}
+ \left(Js+\frac{K_{T}K_{E}}{R_{a}+L_{a}}s\right)\Omega_m(s)=\frac{K_{T}}{R_{a}+L_{a}s}-T_L
+\end{equation*}
+%
+\begin{equation*}
+ \Omega_m(s)=\frac{K_T}{JL_{a}s^2+JR_{a}s+K_TK_E}-\frac{R_{a}+L_{a}s}{JL_{a}s^2+JR_{a}s+K_TK_E}T_L
+\end{equation*}
+%
+\begin{equation*}
+ \Omega_m(s)=\frac{\frac{1}{K_E}}{\frac{JL_a}{K_{T}K_E}s^2+\frac{JR_a}{K_{T}K_E}s+1}-\frac{\frac{R_{a}+L_{a}s}{K_{T}K_E}}{\frac{JL_a}{K_{T}K_E}s^2+\frac{JR_a}{K_{T}K_E}s+1}T_L
+\end{equation*}
+%
+となる．
+
 
 \end{document}
