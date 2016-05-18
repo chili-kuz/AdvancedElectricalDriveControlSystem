@@ -1,0 +1,86 @@
+\documentclass[a4paper,12pt]{jarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{comment}
+
+\setlength{\hoffset}{0cm}
+\setlength{\oddsidemargin}{-3mm}
+\setlength{\evensidemargin}{-3cm}
+\setlength{\marginparsep}{0cm}
+\setlength{\marginparwidth}{0cm}
+\setlength{\textheight}{24.7cm}
+\setlength{\textwidth}{17cm}
+\setlength{\topmargin}{-45pt}
+
+\renewcommand{\baselinestretch}{1.6}
+\renewcommand{\floatpagefraction}{1}
+\renewcommand{\topfraction}{1}
+\renewcommand{\bottomfraction}{1}
+\renewcommand{\textfraction}{0}
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+%\renewcommand{\figurename}{Fig.} %図をFig.にする
+
+\begin{comment}
+%図のキャプションからコロン：を消す
+\makeatletter
+\long\def\@makecaption#1#2{% #1=図表番号、#2=キャプション本文
+\sbox\@tempboxa{#1.　#2}
+\ifdim \wd\@tempboxa >\hsize
+#1 #2\par 
+\else
+\hb@xt@\hsize{\hfil\box\@tempboxa\hfil}
+\fi}
+\makeatother
+% 
+\end{comment}
+
+\title{電機システム制御特論 \ レポート課題\\
+Exercise\\
+}
+\author{\vspace{40mm}\\
+九州工業大学大学院 \hspace{0mm} 工学府\\
+機械知能工学専攻\ \hspace{0mm} 知能制御工学コース \\
+\vspace{5mm}\\
+所属：\ 西田研究室\\
+学籍番号：\ 16344217\\
+提出者氏名：\ 津上 \hspace{0mm} 祐典\\\vspace{5mm}\\ }
+\date{平成28年\ 4月\ 15日}
+
+\begin{document}
+
+%表紙
+\titlepage
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+
+\section*{問題}
+Consider the actuator is made by stacking 100 PZT plates eith the source
+voltage is 200 V. Each plate has a thickness of 120$\mu$m, a length of
+10mm, and a width of 15mm. Compute the generated force and 
+displacement. Assume that Young's modulus of the material is
+$5.3×10^{10}$(N/$\rm{m}^2$)．
+
+\section*{解答}
+
+アクチュエータの変形量$\Delta h$は
+\begin{equation}
+ \Delta h = Nd_{33}V = 100×400×10^{-12}×200 = 8[\mu \rm{m}]
+\end{equation}
+となる．また，アクチュエータの面積$A$，高さ$H$は，それぞれ
+\begin{eqnarray}
+ \begin{cases}
+  A = 10 × 10^{-3} × 15 × 10^{-3} = 1.5 × 10^{-4}  [$\rm{m}^2$] \\
+  H = 120 × 10^{-6} × 100 = 0.012 [\rm{m}] &
+ \end{cases}
+\end{eqnarray}
+となる．したがって発生する力$F_{33}$は，ヤング率を$Y$とすると
+\begin{equation}
+  F_{33} = YA\Delta h/H = 5.3 × 10^{10} × 1.5 ×10^{-4} × 8 ×
+   10^{-6} / 0.12 = 5300 \rm{(N)}
+\end{equation}
+となる．
+
+\end{document}
