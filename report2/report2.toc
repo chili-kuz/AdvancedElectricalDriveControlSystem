@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}問題}{1}
+\contentsline {section}{\numberline {2}DCモータの特性}{1}
+\contentsline {section}{\numberline {3}LQI制御による速度制御系の設計}{2}
+\contentsline {section}{\numberline {4}4象限運転}{5}
+\contentsline {section}{参考文献}{7}

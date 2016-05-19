@@ -56,6 +56,11 @@ Assignment (2016/05/13)\\
 
 \newpage
 
+\thispagestyle{empty}
+\tableofcontents
+
+\newpage
+\setcounter{page}{1}
 %%%%%%%%%%%%%%%%%%%%%%%%
 \section{問題}
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,22 +83,20 @@ DCモータの速度制御系を設計し，４象限運転を実行せよ．た
  \end{tabular}
 \end{table}
 %
-%%%%%%%%%%%%%%%%%%%%%%%%
-\section{コントローラの設計}
-%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{DCモータの特性}
+\section{DCモータの特性}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 はじめに，本レポートで用いるDCモータのブロック線図を図\ref{fig:DC_model}に示す．
 %
-\begin{figure}[htbp]
+\begin{figure}[bp]
  \begin{center}
   \includegraphics[width = 150mm]{fig/DC_model.eps}
  \end{center}
  \caption{DCモータのブロック線図}
  \label{fig:DC_model}
 \end{figure}
+%
+\newpage
 %
 はじめに，図\ref{fig:DC_model}に示すDCモータのモデルの伝達特性を導出する．
 図\ref{fig:DC_model}より
@@ -114,7 +117,7 @@ DCモータの速度制御系を設計し，４象限運転を実行せよ．た
  \Omega_m(s)=\frac{\frac{1}{K_E}}{\frac{JL_a}{K_{T}K_E}s^2+\frac{JR_a}{K_{T}K_E}s+1}-\frac{\frac{R_{a}+L_{a}s}{K_{T}K_E}}{\frac{JL_a}{K_{T}K_E}s^2+\frac{JR_a}{K_{T}K_E}s+1}T_L
 \end{equation}
 %
-となる．ここで，(2)式において
+となる．ここで$K_T=K_E$である．(2)式において
 \begin{eqnarray}
  \begin{cases}
   T = \sqrt{\frac{L_{a}J}{K_{E}K_T}} & \\
@@ -128,9 +131,9 @@ DCモータの速度制御系を設計し，４象限運転を実行せよ．た
 \end{equation}
 となる．
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{LQI速度制御系}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{LQI制御による速度制御系の設計}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 本節ではレギュレータと積分器を組み合わせたサーボ系を構成する．この制御法
 をLQI(Linear Quadratic Integral)制御と呼ばれる．LQI制御系のブロック線図
 を図\ref{fig:LQI_model}に示す．
@@ -153,7 +156,9 @@ DCモータの速度制御系を設計し，４象限運転を実行せよ．た
  \end{cases}
 \end{eqnarray}
 %
-となる．ここで$u=v$とおき，DCモータの状態方程式を求めると，
+となる．$v$はDCモータへの入力電圧である．
+ここで$u=v$，$x=(i_a  \ \omega_m)^t \ $(ただし，$i_a$は電機子電流，
+$\omega_m$は出力速度)とおき，DCモータの状態方程式を求めると，
 \begin{equation}
  \frac{dx}{dt} =
   \begin{pmatrix}
@@ -167,7 +172,7 @@ DCモータの速度制御系を設計し，４象限運転を実行せよ．た
 \end{pmatrix}
 u = Ax + bu
 \end{equation}
-となる．ただし，$x=(i_a \ \ \omega_m)^t$である．係数行列$A,b$は
+となる．係数行列$A,b$は
 %
 \begin{eqnarray}
  \begin{cases}
@@ -321,14 +326,22 @@ k_e=
 \end{cases}
 \end{eqnarray}
 %
-となる．
-ここで，LQI制御によるDCモータの4象限運転のシミュレーション結果を
+となりLQI速度制御系が設計できた．次節でこの制御系を用いて4象限運転を実現
+する．
+
+%%%%%%%%%%%%%%%%%%%%
+\section{4象限運転}
+%%%%%%%%%%%%%%%%%%%
+4象限運転とは，1象限では正転運転，2象限では正転回生，3象限では逆転運転，
+4象限では逆転回生を行う運転である．
+ここで，前節で設計したLQI速度制御系にて4象限運転を実現したシミュレーション結果を
 $r_e=0.001$のときを図\ref{fig:LQI_r0001}に，$r_e=1$のときを図
-\ref{fig:LQI_r1}に示す．ただし，目標速度は運転開始と同時にDC
+\ref{fig:LQI_r1}に示す．また，$r_e=0.05$のときを図\ref{fig:LQI_r005}に示
+す．ただし，目標速度は運転開始と同時にDC
 モータの基底速度である500[rpm]，運転開始から20[s]後に0[rpm]，運転開始か
 ら40[s]後に-500[rpm]，運転開始から60[s]後に0[rpm]と変化するように与えた．
 %
-\begin{figure}[b]
+\begin{figure}[htbp]
  \begin{center}
   \includegraphics[width = 150mm]{fig/LQI_r0001.eps}
  \end{center}
@@ -346,38 +359,44 @@ $r_e=0.001$のときを図\ref{fig:LQI_r0001}に，$r_e=1$のときを図
 \end{figure}
 %
 %
-図\ref{fig:LQI_r0001},\ref{fig:LQI_r1}を見ると，(\ref{eq:hyouka})式で示
+\begin{figure}[htbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/LQI_r005.eps}
+ \end{center}
+ \caption{LQI制御によるDCモータの4象限運転のシミュレーション結果($r_e=0.05$)}
+ \label{fig:LQI_r005}
+\end{figure}
+%
+%
+図\ref{fig:LQI_r0001},\ref{fig:LQI_r1},\ref{fig:LQI_r005}を見ると，(\ref{eq:hyouka})式で示
 した評価関数の重みを$r_e=1$としたときは$r_e=0.001$のときと比べて，応答が
 遅く，出力トルクが小さいことがわかる．評価関数の重み$r_e$が大きいほど応
 答が遅く，出力トルクが小さいのではないかと考えられる．速やかに目標速度に
 到達させたい場合は評価関数を小さく設計すれば良いのではないかと考えれるが，小
 さすぎると出力トルクが大きくなり，モータが破壊する可能性があると考えられ
 る．よって評価関数の重みを適切に選定する必要があると考えられる．
+
+ 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{その他の速度制御系}
+%\section{カスケード速度制御系}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-速度制御系の別の例として，単一ループの速度制御系やカスケード速度制御系が
-ある．
+%DCモータのカスケード制御系のブロック線図を図\ref{fig:cas2_model}に示す．
+%ここで述べるカスケード制御系では一次ループとしての速度制御系の下位に二次
+%ループとして電流制御系を構成し，制御量は速度と電流である．
 %
-\begin{figure}[htbp]
- \begin{center}
-  \includegraphics[width = 150mm]{fig/FB_model.eps}
- \end{center}
- \caption{単一ループによるフィードバック制御}
- \label{fig:FB_model}
-\end{figure}
+%\begin{figure}[htbp]
+ %\begin{center}
+  %\includegraphics[width = 150mm]{fig/cas2_model.eps}
+ %\end{center}
+ %\caption{カスケード制御系のブロック線図}
+ %\label{fig:cas2_model}
+%\end{figure}
 %
-\begin{figure}[htbp]
- \begin{center}
-  \includegraphics[width = 150mm]{fig/cas_model.eps}
- \end{center}
- \caption{カスケード制御}
- \label{fig:cas_model}
-\end{figure}
-%
-%
-\newpage
+%速度制御系のゲイン交差周波数を100[rad/s]，PIコントローラの折れ点周波数を
+%20[rad/s]とおいてカスケード制御系を設計する．一次ループの開ループ伝達関
+%数は，
+
 %
 \begin{thebibliography}{99}
 \addcontentsline{toc}{section}{参考文献}
