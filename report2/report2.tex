@@ -110,11 +110,21 @@ DCモータの速度制御系を設計し，４象限運転を実行せよ．た
  \Omega_m(s)=\frac{K_T}{JL_{a}s^2+JR_{a}s+K_TK_E}-\frac{R_{a}+L_{a}s}{JL_{a}s^2+JR_{a}s+K_TK_E}T_L
 \end{equation*}
 %
-\begin{equation*}
+\begin{equation}
  \Omega_m(s)=\frac{\frac{1}{K_E}}{\frac{JL_a}{K_{T}K_E}s^2+\frac{JR_a}{K_{T}K_E}s+1}-\frac{\frac{R_{a}+L_{a}s}{K_{T}K_E}}{\frac{JL_a}{K_{T}K_E}s^2+\frac{JR_a}{K_{T}K_E}s+1}T_L
-\end{equation*}
+\end{equation}
 %
+となる．ここで，(2)式において
+\begin{eqnarray}
+ \begin{cases}
+  T = \sqrt{\frac{L_{a}J}{K_{E}K_T}} & \\
+  \zeta= \frac{R_a}{2}\sqrt{\frac{J}{K_{E}K_{T}L_a}} & \\
+  K = \frac{1}{K_E}
+ \end{cases}
+\end{eqnarray}
+とおく．すると(2)式は，
+\begin{equation}
+ \Omega_m(s)=\frac{K}{T^2s^2+2\zeta Ts+1}
+\end{equation}
 となる．
-
-
 \end{document}
