@@ -82,9 +82,9 @@ DCモータの速度制御系を設計し，４象限運転を実行せよ．た
 \section{コントローラの設計}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{DCモータ}
-%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{DCモータの特性}
+%%%%%%%%%%%%%%%%%%%%%%%%%
 はじめに，本レポートで用いるDCモータのブロック線図を図\ref{fig:DC_model}に示す．
 %
 \begin{figure}[htbp]
@@ -126,5 +126,149 @@ DCモータの速度制御系を設計し，４象限運転を実行せよ．た
 \begin{equation}
  \Omega_m(s)=\frac{K}{T^2s^2+2\zeta Ts+1}
 \end{equation}
+となる．
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{LQI速度制御系の設計}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+本節ではレギュレータと積分器を組み合わせたサーボ系を構成する．この制御法
+をLQI(Linear Quadratic Integral)制御と呼ばれる．この制御法を利用するため，
+はじめにDCモータの支配方程式を導出する．DCモータの支配方程式は
+%
+\begin{eqnarray}
+ \begin{cases}
+  v = K_{E}\omega_m + R_{a}i_{a} + L_{a} \frac{di_a}{dt} & \\
+  K_{T}i_a = J \frac{d\omega_m}{dt} + T_{L}
+ \end{cases}
+\end{eqnarray}
+%
+となる．ここで$u=v$とおき，DCモータの状態方程式を求めると，
+\begin{equation}
+ \frac{dx}{dt} =
+  \begin{pmatrix}
+   - \frac{R_a}{L_a} & -\frac{K_E}{L_a} \\
+   \frac{K_T}{J} & 0
+  \end{pmatrix}
+  x +
+\begin{pmatrix}
+ \frac{1}{L_a} \\
+ 0
+\end{pmatrix}
+u = Ax + bu
+\end{equation}
+となる．ただし，$x=(i_a \ \ \omega_m)^t$である．係数行列$A,b$は
+%
+\begin{eqnarray}
+ \begin{cases}
+A=
+  \begin{pmatrix}
+   - \frac{R_a}{L_a} & -\frac{K_E}{L_a} \\
+   \frac{K_T}{J} & 0
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+   -50  & -2833.3 \\
+   0.85 & 0
+  \end{pmatrix}
+  & \\
+  b =
+  \begin{pmatrix}
+   333.3 \\
+   0
+  \end{pmatrix}
+ \end{cases}
+\end{eqnarray}
+%
+となる．ここで拡大系の状態方程式は，
+%
+\begin{equation}
+ \delta \dot{x}_e = A_{e}\delta x_e + b_e w
+\end{equation}
+%
+となり，係数行列は，
+%
+\begin{eqnarray}
+ \begin{cases}
+A_e=
+  \begin{pmatrix}
+   A & b \\
+   0 & 0
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+   -50  & -2833.3 & 333.3 \\
+   0.85 & 0       & 0   \\
+   0    &  0      &   0\\
+  \end{pmatrix}
+  & \\
+  b_e =
+  \begin{pmatrix}
+  \ 0 \ \\
+  \ 0 \ \\
+  \ 1 \
+  \end{pmatrix}
+ \end{cases}
+\end{eqnarray}
+%
+と求めらる．評価関数は
+%
+\begin{equation}
+J_e = \int_{0}^{\infty} (\delta x_e^{T}Q_{e}\delta x_e + r_e w^2 ) dt 
+\end{equation}
+%
+\begin{equation}
+ Q_e = c_e^Tc_e = (c \ \ 0)^t(c \ \ 0) =
+\begin{pmatrix}
+ 0 \\
+ 1 \\
+ 0
+\end{pmatrix}
+%
+\begin{pmatrix}
+ 0 & 0 & 1
+\end{pmatrix}
+%
+=
+%
+\begin{pmatrix}
+ 0 & 0 & 0 \\
+ 0 & 1 & 0 \\
+ 0 & 0 & 0
+\end{pmatrix}
+\end{equation}
+%
+である．重み$r_e$を$r_e=0.001$とし，LQ問題を計算するとフィードバックゲイ
+ン$k_e$は
+%
+\begin{equation}
+ k_e = b_e^{T}P_e/r_e
+\end{equation}
+%
+で求められる．ただし，行列$P_e$はリッカチ方程式
+%
+\begin{equation}
+ A_e^{T}P_e + P_e A_e + Q_e - P_e b_e b_e^T P_e /r_e = 0
+\end{equation}
+%
+の正定対称解である．これを解くと，
+%
+\begin{equation}
+ P_e =
+  \begin{pmatrix}
+   0      & 0.0002 & 0 \\
+   0.0002 & 0.0204 & 0.0001 \\
+   0      & 0.0001 & 0.0037
+  \end{pmatrix}
+\end{equation}
+%
+を得る．(12)式に代入すれば，
+%
+\begin{equation}
+ k_e =
+  \begin{pmatrix}
+   0 & 0.1 & 3.7
+  \end{pmatrix}
+\end{equation}
+%
 となる．
 \end{document}
