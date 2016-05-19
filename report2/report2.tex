@@ -132,7 +132,18 @@ DCモータの速度制御系を設計し，４象限運転を実行せよ．た
 \subsection{LQI速度制御系の設計}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 本節ではレギュレータと積分器を組み合わせたサーボ系を構成する．この制御法
-をLQI(Linear Quadratic Integral)制御と呼ばれる．この制御法を利用するため，
+をLQI(Linear Quadratic Integral)制御と呼ばれる．LQI制御系のブロック線図
+を図\ref{fig:LQI_model}に示す．
+%
+\begin{figure}[htbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/LQI_model.eps}
+ \end{center}
+ \caption{LQI制御系}
+ \label{fig:LQI_model}
+\end{figure}
+%
+この制御法を利用するため，
 はじめにDCモータの支配方程式を導出する．DCモータの支配方程式は
 %
 \begin{eqnarray}
@@ -270,5 +281,35 @@ J_e = \int_{0}^{\infty} (\delta x_e^{T}Q_{e}\delta x_e + r_e w^2 ) dt
   \end{pmatrix}
 \end{equation}
 %
-となる．
+となる．以上より，サーボ系のゲインとして，
+%
+\begin{equation}
+ \begin{pmatrix}
+  k_1 & k_2
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+  0.011 & 0.653  & 31.55
+ \end{pmatrix}
+\end{equation}
+%
+を得る．
+%
+\begin{figure}[htbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/LQI_r0001.eps}
+ \end{center}
+ \caption{LQI制御系(r=0.001)}
+ \label{fig:LQI_r0001}
+\end{figure}
+%
+%
+\begin{figure}[htbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/LQI_r1.eps}
+ \end{center}
+ \caption{LQI制御系(r=1)}
+ \label{fig:LQI_r1}
+\end{figure}
+%
 \end{document}
