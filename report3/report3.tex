@@ -64,22 +64,116 @@ Assignment (2016/05/20)\\
 %%%%%%%%%%%%%%%%%%%%%%%%
 \section{問題}
 %%%%%%%%%%%%%%%%%%%%%%%%
+Consider the following system
 %
-\begin{figure}[bp]
+\begin{eqnarray}
+ \begin{cases}
+  x = ax + bu + v & \\
+  y = x + w
+ \end{cases}
+\end{eqnarray}
+%
+
+where $a=-0.02$ , $b=0.001351$, and $v$ and $w$ are both White Gaussian
+noise $E \bigl\{ v^2 \bigr\} = E \bigl\{ w^2 \bigr\} = 0.7$.
+
+Design kalman filter for the system, and demonstrate the performance
+with computer simulations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{カルマンフィルタとは}
+%%%%%%%%%%%%%%%%%%%%%%%%
+カルマンフィルタとは，雑音が入った観測値を用いて，ある動的システムの状
+態推定（フィルタリング）するものである．状態方程式の状態推定する方法
+として，ルーエンバーガによるオブザーバ（状態推定器）が有名であるが，これ
+は雑音などが存在しない確定的な場合を対象としている．それに対して，カルマ
+ンフィルタは，確定的な枠組みで状態推定問題を検討した．カルマンフィルタで
+は，雑音の正規白色性を仮定することにより，システマティックに最適設計が可
+能という優位点を持つ．制御対象の正確なモデルを利用できれば，状態推定
+（フィルタリング）することが出来る．これは，カルマンフィルタの重要なポイ
+ントである．つまり，制御対象のモデリングの正確さがカルマンフィルタの精度
+に関わってくる．図\ref{fig:kalman_m}にある制御対象にカルマンフィルタを適
+応したものを示す．
+
+%
+\begin{figure}[htbp]
  \begin{center}
-  \includegraphics[width = 150mm]{fig/kalmanfilter.eps}
+  \includegraphics[width = 150mm]{fig/kalman_model.eps}
  \end{center}
- \caption{DCモータのブロック線図}
- \label{fig:DC_model}
+ \caption{カルマンフィルタ}
+ \label{fig:kalman_m}
 \end{figure}
 %
-\begin{figure}[bp]
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{カルマンフィルタの設計}
+%%%%%%%%%%%%%%%%%%%%%%%%
+カルマンフィルタを設計するためにまずカルマンゲイン$l$を導出する．カルマ
+ンゲインは以下の式より導出できる．
+\begin{equation}\label{equ:gain}
+ l = \frac{1}{r}Pc^T
+\end{equation}
+ただし，$P$はリッカチ方程式
+\begin{equation}\label{equ:ricca}
+ AP + PA^T -\frac{1}{r}Pc^TcP = -Q 
+\end{equation}
+の実正定行列解である．(\ref{equ:ricca})式に
+\begin{eqnarray}
+ \begin{cases}
+  A = -0.02 & \\
+  r = 0.7 & \\
+  Q = 0.7 & \\
+  c = 1
+ \end{cases}
+\end{eqnarray}
+を代入し，整理すると
+\begin{equation}
+ P^2 + 0.028P -0.49 = 0
+\end{equation}
+を得る．$P > 0$より上式の解は
+\begin{equation}
+ P = 0.686
+\end{equation}
+となる．するとカルマンゲイン$l$は，
+\begin{equation}
+ l = \frac{1}{0.7} \times 0.686 \times 1 = 0.98
+\end{equation}
+となる．したがってカルマンフィルタは
+\begin{eqnarray}
+ \begin{cases}
+\dot{\tilde{x}} = -0.02x + 0.001351u + 0.98 \big(y - \tilde{y} \big)
+  & \\
+  \tilde{y} = \tilde{x}
+ \end{cases}
+\end{eqnarray}
+となる．
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{シミュレーション}
+%%%%%%%%%%%%%%%%%%%%%%%%
+制御入力（ステップ入力）$u$を$u=1000$としてMATLAB/Simulinkでシミュレーションを行った．こ
+のとき，構成したSimulinkのモデルを図\ref{fig:kalman_b}に示す．また，シミュ
+レーション結果を図\ref{fig:kalman_g}に示す．ただし，システムノイズ$v$を
+$v=0$とし，シミュレーションを行った．
+%
+\begin{figure}[htbp]
  \begin{center}
-  \includegraphics[width = 150mm]{fig/kalmanfilterG.eps}
+  \includegraphics[width = 150mm]{fig/kalmanfilter2.eps}
  \end{center}
- \caption{DCモータのブロック線図}
- \label{fig:DC}
+ \caption{simulinkで使用したモデル}
+ \label{fig:kalman_b}
 \end{figure}
+%
+\begin{figure}[htbp]
+ \begin{center}
+  \includegraphics[width = 170mm]{fig/kalmanfilterG.eps}
+ \end{center}
+ \caption{シミュレーション結果}
+ \label{fig:kalman_g}
+\end{figure}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{考察}
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 %
 \begin{thebibliography}{99}
@@ -88,7 +182,8 @@ Assignment (2016/05/20)\\
  \bibitem{denki} T.Sakamoto,
 		 "Lecture Notes of Advanced Electrical Drive Control System", 2016.
 
- \bibitem{mecha} 坂本哲三, "電気機器の電気力学と制御", 森北出版, 2007.
+ \bibitem{adachi} 足立修一，丸田一郎，"カルマンフィルタの基礎"，東京電機
+		 大学出版局，2014．
 
 \end{thebibliography}
 
