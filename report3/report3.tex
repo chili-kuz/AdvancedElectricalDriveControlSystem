@@ -76,7 +76,6 @@ Consider the following system
 
 where $a=-0.02$ , $b=0.001351$, and $v$ and $w$ are both White Gaussian
 noise $E \bigl\{ v^2 \bigr\} = E \bigl\{ w^2 \bigr\} = 0.7$.
-
 Design kalman filter for the system, and demonstrate the performance
 with computer simulations.
 
@@ -92,11 +91,28 @@ with computer simulations.
 能という優位点を持つ．制御対象の正確なモデルを利用できれば，状態推定
 （フィルタリング）することが出来る．これは，カルマンフィルタの重要なポイ
 ントである．つまり，制御対象のモデリングの正確さがカルマンフィルタの精度
-に関わってくる．図\ref{fig:kalman_m}にある制御対象にカルマンフィルタを適
-応したものを示す．
-
+に関わってくる．図\ref{fig:kalman_m}に，あるシステムにカルマンフィルタを適
+応したものを示す．図\ref{fig:kalman_m}に示す一入力一出力のシステム
+\begin{eqnarray}
+ \begin{cases}
+  \dot{x}=Ax+bu+v & \\
+  y = cx + w
+  \end{cases}
+\end{eqnarray}
+を考える．ここで$(A,c)$の組は可観測である．また，$v$はシステムノイズであ
+り，$w$は観測ノイズである．これらの２つのノイズは白色ガウシアンノイズと
+呼ばれており，
+\begin{eqnarray}
+ \begin{cases}
+  E \bigl\{v(t)\bigr\} = 0 \ , \ E \bigl\{w(t)\bigr\} = 0 & \\
+  E \bigl\{v(t)v(\tau)^T\bigr\} = Q\delta (t - \tau) \ , \  E
+  \bigl\{w(t)w(\tau)^T\bigr\} = r\delta (t - \tau) & \\
+  E \bigl\{v(t)w(\tau)\bigr\} = 0  
+ \end{cases}
+\end{eqnarray}
+と表される．
 %
-\begin{figure}[htbp]
+\begin{figure}[tbp]
  \begin{center}
   \includegraphics[width = 150mm]{fig/kalman_model.eps}
  \end{center}
@@ -107,7 +123,7 @@ with computer simulations.
 %%%%%%%%%%%%%%%%%%%%%%%%
 \section{カルマンフィルタの設計}
 %%%%%%%%%%%%%%%%%%%%%%%%
-カルマンフィルタを設計するためにまずカルマンゲイン$l$を導出する．カルマ
+カルマンフィルタを設計するために，カルマンゲイン$l$を導出する．カルマ
 ンゲインは以下の式より導出できる．
 \begin{equation}\label{equ:gain}
  l = \frac{1}{r}Pc^T
@@ -137,7 +153,7 @@ with computer simulations.
 \begin{equation}
  l = \frac{1}{0.7} \times 0.686 \times 1 = 0.98
 \end{equation}
-となる．したがってカルマンフィルタは
+となる．したがってカルマンフィルタは以下の式で与えられる．
 \begin{eqnarray}
  \begin{cases}
 \dot{\tilde{x}} = -0.02x + 0.001351u + 0.98 \big(y - \tilde{y} \big)
@@ -145,36 +161,47 @@ with computer simulations.
   \tilde{y} = \tilde{x}
  \end{cases}
 \end{eqnarray}
-となる．
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 \section{シミュレーション}
 %%%%%%%%%%%%%%%%%%%%%%%%
 制御入力（ステップ入力）$u$を$u=1000$としてMATLAB/Simulinkでシミュレーションを行った．こ
 のとき，構成したSimulinkのモデルを図\ref{fig:kalman_b}に示す．また，シミュ
-レーション結果を図\ref{fig:kalman_g}に示す．ただし，システムノイズ$v$を
+レーション結果を図\ref{fig:kalman_g}に示す．また，Timeが300から400のとき
+の拡大図も図\ref{fig:kalman_g}に合わせて示す．ただし，システムノイズ$v$を
 $v=0$とし，シミュレーションを行った．
 %
-\begin{figure}[htbp]
+\begin{figure}[bp]
  \begin{center}
   \includegraphics[width = 150mm]{fig/kalmanfilter2.eps}
  \end{center}
- \caption{simulinkで使用したモデル}
+ \caption{simulinkで構成したモデル}
  \label{fig:kalman_b}
 \end{figure}
 %
 \begin{figure}[htbp]
  \begin{center}
-  \includegraphics[width = 170mm]{fig/kalmanfilterG.eps}
+  \includegraphics[width = 170mm]{fig/kalmanfilterG2.eps}
  \end{center}
  \caption{シミュレーション結果}
  \label{fig:kalman_g}
 \end{figure}
 %
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%
 \section{考察}
 %%%%%%%%%%%%%%%%%%%%%%%%
-
+図\ref{fig:kalman_g}を見ると，カルマンフィ
+ルタを用いた推定値（$\tilde{y}=\tilde{x}$）が測定値（$y=x+w$）より観測ノ
+イズを除いた真値（$y=x$）との誤差が小さいことがわかる．つまり，カルマンフィ
+ルタを使ったことにより観測ノイズの影響を抑えていることがわかる．本レポー
+トでは，システムノイズや観測ノイズの分散が既知としてシミュレーションを行っ
+たが，現実世界ではノイズの正確な分散を得るのは難しい．よって，カルマンゲ
+イン$l$を一定にするのでなく，ノイズの変化に合わせて$l$も変化させなければ
+ならないと考えられる．また，節で述べたように制御対象のモデル化の精度にも
+状態推定の精度が関わってくるため，制御対象をモデル化も精度良く行わなけれ
+ばならないと考えられる．
 %
 \begin{thebibliography}{99}
 \addcontentsline{toc}{section}{参考文献}

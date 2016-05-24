@@ -1,9 +1,9 @@
 # Fdb version 3
-["dvipdf"] 1464052888 "report3.dvi" "report3.pdf" "report3" 1464052889
-  "report3.dvi" 1464052888 7380 ffc143a7864eb399ab12ba45feb8e98c "latex"
+["dvipdf"] 1464077545 "report3.dvi" "report3.pdf" "report3" 1464077755
+  "report3.dvi" 1464077545 10296 bb6c649c88a07f601602b36463ba719e "latex"
   (generated)
   "report3.pdf"
-["latex"] 1464052888 "report3.tex" "report3.dvi" "report3" 1464052889
+["latex"] 1464077545 "report3.tex" "report3.dvi" "report3" 1464077755
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty" 1335995445 8253 3bdedc8409aa5d290a2339be6f09af03 ""
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty" 1335995445 18425 775b341047ce304520cc7c11ca41392e ""
   "/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsbsy.sty" 1456875012 2210 5c54ab129b848a5071554186d0168766 ""
@@ -24,12 +24,12 @@
   "/usr/local/texlive/2015/texmf-dist/tex/platex/base/jsize12.clo" 1274206740 9598 fa730555eee77484e4f33073895956b9 ""
   "fig/kalman_model.eps" 1464050085 101343 efec5b3697cfa4a9b5e201ba9aa28bfe ""
   "fig/kalmanfilter2.eps" 1464048623 208638 f5fa08ce5c4b32c0dc8c2cf2e0c10b36 ""
-  "fig/kalmanfilterG.eps" 1464050741 263483 6c6253df04a23502656c2b5c3cab7476 ""
-  "report3.aux" 1464052888 985 28b727b5acd4324cf7f64c42f3feacea ""
-  "report3.tex" 1464052887 5661 9c49e3e7e59a33f7c552f60444eec417 ""
-  "report3.toc" 1464052888 360 b206c7b469fa55289603d32a470ef52b ""
+  "fig/kalmanfilterG2.eps" 1464060519 189467 f83b8b63929e9b428177ce5585862d3b ""
+  "report3.aux" 1464077545 985 f1a40462ca06e40654f92b344b4e624a ""
+  "report3.tex" 1464077544 7424 5aa54d4d41c9f06423929a0485cff187 ""
+  "report3.toc" 1464077545 360 97ddcb8ea63cdcdf14dde9e6193a67ae ""
   (generated)
   "report3.log"
+  "report3.dvi"
   "report3.aux"
   "report3.toc"
-  "report3.dvi"
