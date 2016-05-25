@@ -145,7 +145,16 @@ $v(t)$と$w(t)$の自己相関がそれぞれ$Q,r$であ
 \begin{equation}
  e(t) = x - \tilde{x}
 \end{equation}
-を考え，これを
+を考え，これを・・・・・
+\begin{eqnarray}
+ \dot{x}^{\rm{T}} Q x + u^{\rm{T}} ru & = & -x^{\rm{T}}APx-x^{\rm{T}}PA^{\rm{T}}x+\frac{1}{r}x^{\rm{T}}Pcc^{\rm{T}}Px+u^{\rm{T}}ru \\
+ & = & -(\dot{x}^{\rm{T}} -
+  u^{\rm{T}}c)Px-x^{\rm{T}}P(\dot{x}-c^{\rm{T}}u)+\frac{1}{r}x^{\rm{T}}Pcc^{\rm{T}}Px+u^{\rm{T}}ru \\
+ & = & -\dot{x}^T Px + u^T cPx -x^{\rm{T}}P\dot{x} + x^{\rm{T}}
+  Pc^{\rm{T}}u + \frac{1}{r}x^{\rm{T}}Pcc^{\rm{T}}Px+u^{\rm{T}}ru \\
+ & = & -2 \dot{x}^{\rm{T}}Px + u^{\rm{T}}u + 2ru^{\rm{T}}cPx + \frac{1}{r}x^{\rm{T}}Pcc^{\rm{T}}Px
+\end{eqnarray}
+ここで，
 %%%%%%%%%%%%%%%%%%%%%%%%
 \section{カルマンフィルタの設計}
 %%%%%%%%%%%%%%%%%%%%%%%%
