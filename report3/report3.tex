@@ -100,17 +100,21 @@ with computer simulations.
   \end{cases}
 \end{eqnarray}
 を考える．ここで$(A,c)$の組は可観測である．また，$v$はシステムノイズであ
-り，$w$は観測ノイズである．これらの２つのノイズは白色ガウシアンノイズと
-呼ばれており，
-\begin{eqnarray}
- \begin{cases}
-  E \bigl\{v(t)\bigr\} = 0 \ , \ E \bigl\{w(t)\bigr\} = 0 & \\
-  E \bigl\{v(t)v(\tau)^T\bigr\} = Q\delta (t - \tau) \ , \  E
-  \bigl\{w(t)w(\tau)^T\bigr\} = r\delta (t - \tau) & \\
-  E \bigl\{v(t)w(\tau)\bigr\} = 0  
- \end{cases}
-\end{eqnarray}
-と表される．
+り，$w$は観測ノイズである．これらの２つのノイズは白色ガウス雑音と
+呼ばれており，システムノイズ$v(t)$，観測ノイズ$w(t)$は
+\begin{equation}\label{equ:ave}
+  E \bigl\{v(t)\bigr\} = 0 \ , \ E \bigl\{w(t)\bigr\} = 0 
+\end{equation}
+%
+\begin{equation}\label{equ:soukan}
+E \bigl\{v(t)v(\tau)^T\bigr\} = Q\delta (t - \tau) \ , \  E
+ \bigl\{w(t)w(\tau)^T\bigr\} = r\delta (t - \tau)
+\end{equation}
+%
+\begin{equation}\label{equ:vw}
+  E \bigl\{v(t)w(\tau)\bigr\} = 0 %\ \ \ \ \ \rm{for \  all} \ t \ \rm{and} \ \tau
+\end{equation}
+を満たす．
 %
 \begin{figure}[tbp]
  \begin{center}
@@ -120,6 +124,28 @@ with computer simulations.
  \label{fig:kalman_m}
 \end{figure}
 %
+ここで(\ref{equ:ave})式では$v(t),w(t)$の平均が0であること，(\ref{equ:soukan})式は
+$v(t)$と$w(t)$の自己相関がそれぞれ$Q,r$であ
+ること，(\ref{equ:vw})式では$v(t),w(\tau)$の相互
+相関が0であることを表している．
+
+定常カルマンフィルタは同一次元オブザーバと同じ構造であり，以下の式で与え
+られる．
+%
+\begin{eqnarray}
+ \begin{cases}
+\dot{\tilde{x}} = Ax + bu + l \big(y - \tilde{y} \big)
+  & \\
+  \tilde{y} = c\tilde{x}
+ \end{cases}
+\end{eqnarray}
+%
+同一次元オブザーバを考えるときは$l$はフィードバックゲインであり，定常カ
+ルマンフィルタと考えるときはカルマンゲインである．ここで，誤差関数
+\begin{equation}
+ e(t) = x - \tilde{x}
+\end{equation}
+を考え，これを
 %%%%%%%%%%%%%%%%%%%%%%%%
 \section{カルマンフィルタの設計}
 %%%%%%%%%%%%%%%%%%%%%%%%
