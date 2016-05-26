@@ -1,9 +1,9 @@
 # Fdb version 3
-["dvipdf"] 1464246880 "report3.dvi" "report3.pdf" "report3" 1464246882
-  "report3.dvi" 1464246880 19084 9f50e24a78bad299d46b8db3d3537604 "latex"
+["dvipdf"] 1464261674 "report3.dvi" "report3.pdf" "report3" 1464261675
+  "report3.dvi" 1464261674 21552 5b5d49730fd388a44b7cec722f091324 "latex"
   (generated)
   "report3.pdf"
-["latex"] 1464246880 "report3.tex" "report3.dvi" "report3" 1464246882
+["latex"] 1464261674 "report3.tex" "report3.dvi" "report3" 1464261675
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty" 1335995445 8253 3bdedc8409aa5d290a2339be6f09af03 ""
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty" 1335995445 18425 775b341047ce304520cc7c11ca41392e ""
   "/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsbsy.sty" 1456875012 2210 5c54ab129b848a5071554186d0168766 ""
@@ -27,11 +27,12 @@
   "fig/kalmanfilterB.eps" 1464232358 60130 84f1901b2bed8fcf2ae67e8f076744ca ""
   "fig/kalmanfilterG.eps" 1464050741 263483 6c6253df04a23502656c2b5c3cab7476 ""
   "fig/state_fb.eps" 1464246605 62571 e1815ef620cbb5713c12c90c47ecee7b ""
-  "report3.aux" 1464246880 1706 cb07a7abe28f2238c3940900419353da ""
-  "report3.tex" 1464246879 13103 3e5c16a709d821022cd88f08c0136ef9 ""
-  "report3.toc" 1464246880 487 52c2feb32ea65084dc7adf698de12e67 ""
+  "fig/state_observer.eps" 1464261155 85582 ee8ebb6b78342a0c33d25dd1f2e5cede ""
+  "report3.aux" 1464261674 1876 eac2089954d2778a8b0f3d3928d9a144 ""
+  "report3.tex" 1464261673 14770 fc92f94000ccd693c93d184ce7dd14b4 ""
+  "report3.toc" 1464261674 487 1ecc417920217a944778d73e6607b8d2 ""
   (generated)
-  "report3.aux"
+  "report3.dvi"
   "report3.toc"
   "report3.log"
-  "report3.dvi"
+  "report3.aux"
