@@ -141,20 +141,106 @@ $v(t)$と$w(t)$の自己相関がそれぞれ$Q,r$であ
 \end{eqnarray}
 %
 同一次元オブザーバを考えるときは$l$はフィードバックゲインであり，定常カ
-ルマンフィルタと考えるときはカルマンゲインである．ここで，誤差関数
+ルマンフィルタと考えるときはカルマンゲインである．
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{カルマンゲインの導出}
+%%%%%%%%%%%%%%%%%%%%%%%%
+この節ではカルマンゲイン$l$を導出する．前節でカルマンフィルタと同一次元
+オブザーバは同じ構造であると述べた．カルマンゲイン$l$を導出することは，
+同一次元オブザーバのフィードバックゲイン$l$を導出することと同じ意味であ
+る．はじめに，オブザーバの推定誤差ベクトルを
 \begin{equation}
- e(t) = x - \tilde{x}
+ e = x - \tilde{x}
 \end{equation}
-を考え，これを・・・・・
+とおく．すると誤差ベクトルのダイナミクスとして，
+\begin{eqnarray}
+ \dot{e} & = & \dot{x} - \dot{\tilde{x}} \\
+ & = & (Ax+bu) - \bigl\{ A\tilde{x} + bu + l(y - \tilde{y} )\bigr\} \\
+ & = & (A-lc)e
+\end{eqnarray}
+を得る．上式よりオブザーバの特性方程式は，
+\begin{equation}\label{equ:obtk}
+ {\rm{det}} (sI-A+lc)=0
+\end{equation}
+となる．ただし，$I$は単位行列である．ここで図\ref{fig:state_fb}に示すような，状態フィード
+バック制御系について考える．
+%
+\begin{figure}[tbp]
+ \begin{center}
+  \includegraphics[width = 70mm]{fig/state_fb.eps}
+ \end{center}
+ \caption{状態フィードバック制御系}
+ \label{fig:state_fb}
+\end{figure}
+%
+このシステムの特性方程式は，
+\begin{equation}\label{equ:statefb}
+ {\rm{det}} (sI-A+bk)=0
+\end{equation}
+となる．行列$H$が正則であるとき，
+\begin{equation}
+ {\rm{det}} H = {\rm{det}} H^{\rm{T}}
+\end{equation}
+が成り立つので(\ref{equ:obtk})式は
+\begin{equation}\label{equ:obtkt}
+  {\rm{det}} (sI-A^{\rm{T}}+c^{\rm{T}}l^{\rm{T}})=0
+\end{equation}
+と書き換えることが出来る．(\ref{equ:statefb}),(\ref{equ:obtkt})式をより，
+オブザーバの設計と制御系の設計に双対性があることがわかる．
+オブザーバの設計に用いる係数行列$(A,b,c)$は係数行
+列$(A^{\rm{T}},c^{\rm{T}},b^{\rm{T}})$で表現されるレギュレータ問題に変換
+される．以下の式で表現される状態フィードバック制御系を用いてLQレギュレー
+タ問題を考える．
+
+\begin{eqnarray}\label{equ:lq}
+ \begin{cases}
+  \dot{x} = A^{\rm{T}}x+c^{\rm{T}}u & \\
+  y = b^{\rm{T}}x & \\
+  u = -l^{\rm{T}}x
+ \end{cases}
+\end{eqnarray}
+ここで評価関数$J$を
+\begin{equation}
+ J  = \int_0^\infty (\dot{x}^{\rm{T}} Q x + u^{\rm{T}}ru) dt
+\end{equation}
+と定義する．ただし，行列$Q$は$Q \geq 0$，スカラ$r$は$r>0$を満たす．
+(\ref{equ:lq})式よりリッカチ方程式は，
+\begin{equation}
+ AP + PA^T -\frac{1}{r}Pc^TcP = -Q 
+\end{equation}
+となる．これを$J$に代入する．まず，積分を抜いた式に代入すると，
 \begin{eqnarray}
  \dot{x}^{\rm{T}} Q x + u^{\rm{T}} ru & = & -x^{\rm{T}}APx-x^{\rm{T}}PA^{\rm{T}}x+\frac{1}{r}x^{\rm{T}}Pcc^{\rm{T}}Px+u^{\rm{T}}ru \\
  & = & -(\dot{x}^{\rm{T}} -
   u^{\rm{T}}c)Px-x^{\rm{T}}P(\dot{x}-c^{\rm{T}}u)+\frac{1}{r}x^{\rm{T}}Pcc^{\rm{T}}Px+u^{\rm{T}}ru \\
  & = & -\dot{x}^T Px + u^T cPx -x^{\rm{T}}P\dot{x} + x^{\rm{T}}
   Pc^{\rm{T}}u + \frac{1}{r}x^{\rm{T}}Pcc^{\rm{T}}Px+u^{\rm{T}}ru \\
- & = & -2 \dot{x}^{\rm{T}}Px + u^{\rm{T}}u + 2ru^{\rm{T}}cPx + \frac{1}{r}x^{\rm{T}}Pcc^{\rm{T}}Px
+ & = & -2 \dot{x}^{\rm{T}}Px + u^{\rm{T}}ru + 2ru^{\rm{T}}cPx + \frac{1}{r}x^{\rm{T}}Pcc^{\rm{T}}Px
 \end{eqnarray}
-ここで，
+となる．ここで$P$は正定行列であるから，
+\begin{eqnarray}
+ \dot{x}^{\rm{T}} Q x + u^{\rm{T}} ru & = &  -2 \dot{x}^{\rm{T}}Px +
+  r \left(u+\frac{1}{r}cPx \right)^{\rm{T}} \left(u+\frac{1}{r}cPx \right) \\
+ & = & - \frac{d}{dt} \left(x^{\rm{T}} Px \right)+ r \left(u+\frac{1}{r}cPx \right)^{\rm{T}} \left(u+\frac{1}{r}cPx \right)
+\end{eqnarray}
+となる．定常状態において状態量は見かけ上$0$である．つまり$x(\infty)=0$で
+あるから，評価関数$J$は，
+\begin{eqnarray}
+ J & = & \int_0^\infty  \Bigl\{ -\frac{d}{dt} \left(x^{\rm{T}}Px \right) +  r \left(u+\frac{1}{r}cPx \right)^{\rm{T}}
+  \left(u+\frac{1}{r}cPx \right) \Bigr\} dt\\
+ & = &  x^{\rm{T}}(0)Px(0)  + r \int_0^\infty \left(u+\frac{1}{r}cPx \right)^{\rm{T}}
+  \left(u+\frac{1}{r}cPx \right)  dt
+\end{eqnarray}
+となる．すると，$J$を最小にするには制御入力$u$を
+\begin{equation}
+ u = - \frac{1}{r}cPx
+\end{equation}
+とすれば良いことがわかる．よってカルマンゲイン$l$は
+\begin{equation}
+ l = \frac{1}{r}Pc^T
+\end{equation}
+と求まる．
 %%%%%%%%%%%%%%%%%%%%%%%%
 \section{カルマンフィルタの設計}
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -217,10 +303,19 @@ $v=0$とし，シミュレーションを行った．
 %
 \begin{figure}[htbp]
  \begin{center}
-  \includegraphics[width = 170mm]{fig/kalmanfilterG2.eps}
+  \includegraphics[width = 150mm]{fig/kalmanfilterG.eps}
  \end{center}
  \caption{シミュレーション結果}
  \label{fig:kalman_g}
+\end{figure}
+%
+%
+\begin{figure}[htbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/kalmanfilterB.eps}
+ \end{center}
+ \caption{シミュレーション結果（Timeが300から400のとき）}
+ \label{fig:kalman_B}
 \end{figure}
 %
 \newpage
@@ -238,6 +333,13 @@ $v=0$とし，シミュレーションを行った．
 状態推定の精度が関わってくるため，制御対象をモデル化も精度良く行わなけれ
 ばならないと考えられる．
 %
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{まとめ}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage
+%
 \begin{thebibliography}{99}
 \addcontentsline{toc}{section}{参考文献}
 
@@ -249,6 +351,8 @@ $v=0$とし，シミュレーションを行った．
 		 大学出版局，2014．
 
  \bibitem{hori} 堀洋一，大西公平，"応用制御工学"，丸善株式会社，1998．
+
+ \bibitem{kanai} 金井喜美雄，"適応制御入門"，オーム社，1986．
 \end{thebibliography}
 
 \end{document}

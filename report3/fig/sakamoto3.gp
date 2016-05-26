@@ -3,6 +3,8 @@ set key
 
 set xlabel 'Time '
 
+set yrange[64:71]
+
 plot "./data7_1.dat" u 1:2 w l lt 1 lc rgb "black" lw 3,"./data8_1.dat" u 1:3 w l lt 1 lc rgb "red" lw 3,"./data8_1.dat" u 1:2 w l lt 1 lc rgb "blue" lw 3
 
 set terminal tgif
