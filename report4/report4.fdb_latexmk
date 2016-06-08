@@ -1,9 +1,9 @@
 # Fdb version 3
-["dvipdf"] 1465253909 "report4.dvi" "report4.pdf" "report4" 1465253913
-  "report4.dvi" 1465253909 5984 a6a494be3c5cf1cc2e659f64c3721951 "latex"
+["dvipdf"] 1465346787 "report4.dvi" "report4.pdf" "report4" 1465346788
+  "report4.dvi" 1465346787 7748 c6a7cbacf3de3a20df27c0c5db330d4c "latex"
   (generated)
   "report4.pdf"
-["latex"] 1465253908 "report4.tex" "report4.dvi" "report4" 1465253913
+["latex"] 1465346787 "report4.tex" "report4.dvi" "report4" 1465346788
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty" 1335995445 8253 3bdedc8409aa5d290a2339be6f09af03 ""
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty" 1335995445 18425 775b341047ce304520cc7c11ca41392e ""
   "/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsbsy.sty" 1456875012 2210 5c54ab129b848a5071554186d0168766 ""
@@ -23,11 +23,14 @@
   "/usr/local/texlive/2015/texmf-dist/tex/platex/base/jarticle.cls" 1274206740 25507 0e6187042be739768097a38c29341b37 ""
   "/usr/local/texlive/2015/texmf-dist/tex/platex/base/jsize12.clo" 1274206740 9598 fa730555eee77484e4f33073895956b9 ""
   "fig/DC_model.eps" 1463531551 47192 0a6dbf4a8171b0c3820f8315a47b100f ""
-  "report4.aux" 1465253909 638 0e1e15120702a23dcad4e05498536ca0 ""
-  "report4.tex" 1465253906 4132 65bc5002e33a842b85e356b78a4caad8 ""
-  "report4.toc" 1465253909 262 40b3eefd0006d7b35ab65be285b116dd ""
+  "fig/FF.eps" 1465345820 49340 a3b1641e2271993245a267956ed19000 ""
+  "fig/IMC.eps" 1465346634 67183 2fe3b751a656169e45161644ed8f8af9 ""
+  "fig/IMC_result.eps" 1465342941 15800 a047d2c6827e514eaefed5ca7bb23aa6 ""
+  "report4.aux" 1465346787 1140 7b36ed44cb6fe39ab0f14c6add5b0102 ""
+  "report4.tex" 1465346785 5379 0256505d1eb11a564978d7aeaa3de173 ""
+  "report4.toc" 1465346787 313 81ded5e37080c13ed9fcb3c38dd3ccc9 ""
   (generated)
-  "report4.log"
-  "report4.toc"
   "report4.dvi"
   "report4.aux"
+  "report4.log"
+  "report4.toc"

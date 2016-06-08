@@ -133,9 +133,46 @@ Assignment(2016/06/03)\
 %%%%%%%%%%%%%%%%%%%%%%%%%
 IP-D
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\section{IMC}
+\section{IMC(Internal Model Contorl)による制御系の設計}
 %%%%%%%%%%%%%%%%%%%%%%%%%
-IMC
+本節ではIMC(Internal Model Contorl)法を用いてDCモータの速度制御系を設計
+する．IMC法（内部モデル制御法）は適切なフィルタを選ぶことで簡単に安定な
+制御系を設計できる手法である．図\ref{fig:ff}にフィードフォワード制御系のブロック線図
+を示す．ここで，コントローラ$Q(s)$がプラントのモデル$P(s)$の逆数と等価で
+あるとき，出力$Y(s)$は，入力を$R(s)$とすると，
+\begin{equation}
+Y(s) = P(s)Q(s)R(s) = P(s)P^{-1}(s)R(s) =R(s)
+\end{equation}
+となる．
+%
+\begin{figure}[tbp]
+ \begin{center}
+  \includegraphics[width = 80mm]{fig/FF.eps}
+ \end{center}
+ \caption{フィードフォワード制御系}
+ \label{fig:FF}
+\end{figure}
+%
+%
+\begin{figure}[tbp]
+ \begin{center}
+  \includegraphics[width = 100mm]{fig/IMC.eps}
+ \end{center}
+ \caption{IMCの構造}
+ \label{fig:IMC}
+\end{figure}
+%
+%
+\begin{figure}[tbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/IMC_result.eps}
+ \end{center}
+ \caption{IMC法で$\lambda=0.1,0.2,0.5$として設計したシステムのステップ応答}
+ \label{fig:IMC_result}
+\end{figure}
+%
+
+目標を達するのは早いがトルクは？
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \section{まとめ}
 %%%%%%%%%%%%%%%%%%%%%%%%%
