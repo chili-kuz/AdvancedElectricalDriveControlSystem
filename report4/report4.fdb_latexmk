@@ -1,9 +1,9 @@
 # Fdb version 3
-["dvipdf"] 1465346787 "report4.dvi" "report4.pdf" "report4" 1465346788
-  "report4.dvi" 1465346787 7748 c6a7cbacf3de3a20df27c0c5db330d4c "latex"
+["dvipdf"] 1465366440 "report4.dvi" "report4.pdf" "report4" 1465366442
+  "report4.dvi" 1465366440 16412 a73f224ad7296907345aac8d028b4887 "latex"
   (generated)
   "report4.pdf"
-["latex"] 1465346787 "report4.tex" "report4.dvi" "report4" 1465346788
+["latex"] 1465366440 "report4.tex" "report4.dvi" "report4" 1465366442
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty" 1335995445 8253 3bdedc8409aa5d290a2339be6f09af03 ""
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty" 1335995445 18425 775b341047ce304520cc7c11ca41392e ""
   "/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsbsy.sty" 1456875012 2210 5c54ab129b848a5071554186d0168766 ""
@@ -11,6 +11,7 @@
   "/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsmath.sty" 1459635588 82019 58dd7b022876c1d593cd2135c441946d ""
   "/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsopn.sty" 1459635588 4115 318a66090112f3aa3f415aeb6fe8540f ""
   "/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amstext.sty" 1456875012 2431 fe3078ec12fc30287f568596f8e0b948 ""
+  "/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd" 1454284088 2256 80ce1168fb4ce6a85583a9cf8972c013 ""
   "/usr/local/texlive/2015/texmf-dist/tex/latex/comment/comment.sty" 1390604416 9666 b0ada4704d4b3d0048a56c49bc982988 ""
   "/usr/local/texlive/2015/texmf-dist/tex/latex/dvipdfmx-def/dvipdfmx.def" 1446939857 12016 60c0fac7007d90f4f22da29a23a0217c ""
   "/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphics.sty" 1454284088 14337 b66dff1d80f6c21e70858a2b3c2d327d ""
@@ -25,12 +26,14 @@
   "fig/DC_model.eps" 1463531551 47192 0a6dbf4a8171b0c3820f8315a47b100f ""
   "fig/FF.eps" 1465345820 49340 a3b1641e2271993245a267956ed19000 ""
   "fig/IMC.eps" 1465346634 67183 2fe3b751a656169e45161644ed8f8af9 ""
+  "fig/IMC_a.eps" 1465363777 54586 1f0d354a7d509204de671a46dd6278b1 ""
+  "fig/IMC_b.eps" 1465362574 59821 6c47d1530f9317e5c85000fb1ec4ab23 ""
   "fig/IMC_result.eps" 1465342941 15800 a047d2c6827e514eaefed5ca7bb23aa6 ""
-  "report4.aux" 1465346787 1140 7b36ed44cb6fe39ab0f14c6add5b0102 ""
-  "report4.tex" 1465346785 5379 0256505d1eb11a564978d7aeaa3de173 ""
-  "report4.toc" 1465346787 313 81ded5e37080c13ed9fcb3c38dd3ccc9 ""
+  "report4.aux" 1465366440 1959 e23bff04f54d80b0d52ad948e5ca5e66 ""
+  "report4.tex" 1465366439 10373 9d62cbeebf92cd2a47d8652a3aebe1c4 ""
+  "report4.toc" 1465366440 490 0410c98741b66c630acf19fa58d1ec68 ""
   (generated)
-  "report4.dvi"
-  "report4.aux"
-  "report4.log"
   "report4.toc"
+  "report4.log"
+  "report4.aux"
+  "report4.dvi"

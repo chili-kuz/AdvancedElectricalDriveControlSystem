@@ -123,8 +123,8 @@ Assignment(2016/06/03)\
  \end{cases}
 \end{eqnarray}
 とおく．すると＊＊から＊＊までの伝達特性は，
-\begin{equation}
- \Omega_m(s)=\frac{K}{T^2s^2+2\zeta Ts+1}
+\begin{equation}\label{equ:plant}
+ P(s)=\frac{K}{T^2s^2+2\zeta Ts+1}
 \end{equation}
 となる．
 
@@ -133,35 +133,155 @@ Assignment(2016/06/03)\
 %%%%%%%%%%%%%%%%%%%%%%%%%
 IP-D
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\section{IMC(Internal Model Contorl)による制御系の設計}
+\section{IMC(Internal Model Contorl)法}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 本節ではIMC(Internal Model Contorl)法を用いてDCモータの速度制御系を設計
 する．IMC法（内部モデル制御法）は適切なフィルタを選ぶことで簡単に安定な
-制御系を設計できる手法である．図\ref{fig:ff}にフィードフォワード制御系のブロック線図
-を示す．ここで，コントローラ$Q(s)$がプラントのモデル$P(s)$の逆数と等価で
-あるとき，出力$Y(s)$は，入力を$R(s)$とすると，
-\begin{equation}
-Y(s) = P(s)Q(s)R(s) = P(s)P^{-1}(s)R(s) =R(s)
-\end{equation}
-となる．
+制御系を設計できる手法である．
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{IMCの原理}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+まず，IMC法の原理について説明する．
 %
 \begin{figure}[tbp]
  \begin{center}
   \includegraphics[width = 80mm]{fig/FF.eps}
  \end{center}
  \caption{フィードフォワード制御系}
- \label{fig:FF}
+ \label{fig:ff}
 \end{figure}
 %
+図\ref{fig:ff}にフィードフォワード制御系のブロック線図
+を示す．ここで，コントローラ$Q(s)$がプラントのモデル$P(s)$の逆数と等価で
+あるとき，出力$Y(s)$は，入力を$R(s)$とすると，
+\begin{equation}
+Y(s) = P(s)Q(s)R(s) = P(s)P^{-1}(s)R(s) =R(s)
+\end{equation}
+となる．つまり，出力$Y(s)$は入力$R(s)$と等しくなる．これがIMC法の原理であ
+り，コントローラはプラントのモデルの情報を含む形になる．図\ref{fig:IMC}
+にIMC法を用いた制御系のブロック線図を示す．
 %
 \begin{figure}[tbp]
  \begin{center}
   \includegraphics[width = 100mm]{fig/IMC.eps}
  \end{center}
- \caption{IMCの構造}
+ \caption{IMC法を用いた制御系}
  \label{fig:IMC}
 \end{figure}
 %
+ここで$P_n(s)$はプラントのノミナルモデルである．もし，ノミナルモデルがプ
+ラントのモデルと完全に一致（つまり$P_n(s)=P(n)$）しているなら，プラント
+の出力とノミナルモデルの出力は等しくなる．したがって，図\ref{fig:ff}に示
+すフィードフォワード制御系と等価になる．コントローラはプラントのモデルの
+逆数であることが望ましいが，場合によって，右半面に零点（実部が正の零点）もしくはむだ時間要
+素を持つシステムである非最小位相（NMP）系になる可能性がある．プラントの
+モデルの逆数は制御系のパフォーマンスに影響してくる．このようになった場合
+の改善策として以下の3点が挙げられる．
+%
+\begin{itemize}
+ \item プラントにむだ時間要素を含む場合，$P^{-1}(s)$はコントローラとして使えないので
+	   $P^{-1}(s)$からむだ時間要素を取り除けば良い（無視すれば良い）．
+	   
+ \item プラントに実部が正の零点を持つ場合，$P^{-1}(s)$は不安定である．こ
+	   の場合は，実部が正の零点を取り除き，実部が正の零点を含むよ
+	   うな全域通過関数（all-pass function）を構成すれば良い．例として，
+	   $P_n(s)$に$s=4$という実部が正の零点を持つ場合，$P_n(s)$に
+	   $(s+4)/(s+4)$を掛ける．すると全域通過関数は$(s+4)/(s-4)$となる．
+	   
+ \item $P(n)$が厳密にプロパーで，$P^{-1}(s)$がプロパーでない場合，IMCフィ
+	   ルターと呼ばれるローパスフィルタを追加すれば良い．
+\end{itemize}
+%
+上述した3つ目の場合におけるコントローラの設計に関して考える．プラントの
+ノミナルモデル$P_n(s)$は最小位相（Minimum Phase）部$P_{nM}(s)$と全域通過
+（all-pass）部$P_{nA}(s)$に分解できる．
+%
+\begin{equation}
+ P_n(s)=P_{nM}(s)P_{nA}(s)
+\end{equation}
+%
+ここで$P_{nA}(s)$はむだ時間要素もしくは実部が正の零点をもつ伝達関数であ
+る．ここで，IMCフィルタは以下の式で与えられる．
+%
+\begin{equation}\label{equ:imc_f}
+ F(s) = \frac{1}{(\lambda s + 1)^n}
+\end{equation}
+%
+したがってコントローラ$Q(s)$は
+%
+\begin{equation}\label{equ:imc_c}
+ Q(s) = P_{nM}^{-1}(s)F(s)
+\end{equation}
+%
+となる．また，図\ref{fig:IMC}に示したIMCを用いた制御系は図\ref{fig:henkan}に示すよう
+な等価変形することが出来る．
+%
+\begin{figure}[tbp]
+  \begin{center} 
+  \subfigure[IMC]{
+    \includegraphics[width = 80 mm]{fig/IMC_a.eps}
+     \label{fig:IMC_b}
+  }
+  %
+  \hfill
+  %
+  \subfigure[IMCを等価変換したもの]{
+   \includegraphics[width = 80mm]{fig/IMC_b.eps}
+    \label{fig:IMC_b}
+  }
+  \end{center}
+  \caption{IMCの等価変換}
+  \label{fig:henkan}
+\end{figure}
+%
+図\ref{fig:IMC_b}中のコントローラ$C(s)$は，
+%
+\begin{equation}
+ C(s) = \frac{Q(s)}{1 - P_n(s)Q(s)}
+\end{equation}
+%
+となる．
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{制御系の設計}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+次に，先ほど説明したIMC法を用いてDCモータの速度制御系を設計する．
+ここではノミナルモデルはプラントと等しい，つまり$P(s)=P_{n}(s)$である．
+また，ノミナルモデルは最小位相系である，つまり$P_n(s)=P_{nM}(s)$であると
+仮定する．すると，IMCコントローラ$Q(s)$は(\ref{equ:plant}),(\ref{equ:imc_c})式より
+%
+\begin{equation}
+ Q(s) = P_{nM}^{-1}(s)F(s) = P^{-1}(s)F(s) = \frac{T^2s^2+2\zeta Ts+1}{K}F(s) 
+\end{equation}
+%
+となる．ここで一次（$n=1$）のIMCフィルタ$F(s)$を考えると，
+(\ref{equ:imc_f})式より$F(s)$は
+%
+\begin{equation}
+ F(s) = \frac{1}{\lambda s + 1}
+\end{equation}
+%
+となる．以上より，IMCコントローラ$Q(s)$は
+%
+\begin{equation}
+ Q(s) = \frac{T^2s^2+2\zeta Ts+1}{K(\lambda s + 1)}
+\end{equation}
+%
+となる．したがって，一般のフィードバックコントローラ$C(s)$は
+%
+\begin{eqnarray}\label{equ:C_s}
+ C(s) & = & \frac{Q(s)}{1 - P_n(s)Q(s)} \nonumber  \\ 
+  & = & \frac{\frac{T^2s^2+2\zeta Ts+1}{K(\lambda s +
+  1)}}{1-\frac{K}{T^2s^2+2\zeta Ts+1}\frac{T^2s^2+2\zeta Ts+1}{K(\lambda
+  s + 1)}} \nonumber \\ 
+ & = & \frac{T^2s^2+2\zeta Ts+1}{K\lambda s} \nonumber  \\
+  & = & \frac{2\zeta T}{K\lambda}\Bigl(1+\frac{1}{2\zeta Ts}+\frac{T}{2\zeta}s\Bigr)
+\end{eqnarray}
+%
+となる．\ref{equ:C_s}を見ると
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{シミュレーション}
+%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \begin{figure}[tbp]
  \begin{center}
