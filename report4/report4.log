@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (utf8.euc) (TeX Live 2015) (preloaded format=platex 2016.5.23)  9 JUN 2016 08:55
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (utf8.euc) (TeX Live 2015) (preloaded format=platex 2016.5.23)  9 JUN 2016 10:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -142,14 +142,7 @@ Package: subfigure 2002/03/15 v2.1.5 subfigure package
 (/usr/local/texlive/2015/texmf-dist/tex/latex/comment/comment.sty
 \CommentStream=\write3
 
-Excluding comment 'comment') (./report4.aux
-
-LaTeX Warning: Label `fig:IMC_b' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:IMC_b' multiply defined.
-
-)
+Excluding comment 'comment') (./report4.aux)
 \openout1 = `report4.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
@@ -186,50 +179,47 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
 
  [2]
 File: fig/DC_model.eps Graphic file (type eps)
- <fig/DC_model.eps> [1]
+
+<fig/DC_model.eps> [1]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 137.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 137.
 File: fig/IPD_b.eps Graphic file (type eps)
- <fig/IPD_b.eps>
+ <fig/IPD_b.eps> [2]
 File: fig/IPD_a.eps Graphic file (type eps)
-
-<fig/IPD_a.eps>
+ <fig/IPD_a.eps>
 File: fig/IPD_r.eps Graphic file (type eps)
- <fig/IPD_r.eps> [2]
+ <fig/IPD_r.eps>
+[3]
 File: fig/FF.eps Graphic file (type eps)
- <fig/FF.eps> [3]
+ <fig/FF.eps> [4]
 File: fig/IMC.eps Graphic file (type eps)
  <fig/IMC.eps>
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 228.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 278.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 228.
- [4]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 278.
+ [5]
 File: fig/IMC_a.eps Graphic file (type eps)
 
 <fig/IMC_a.eps>
 File: fig/IMC_b.eps Graphic file (type eps)
- <fig/IMC_b.eps> [5]
+ <fig/IMC_b.eps> [6]
 File: fig/IMC_result.eps Graphic file (type eps)
- <fig/IMC_result.eps> [6] [7] [8]
-(./report4.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+ <fig/IMC_result.eps> [7] [8] [9]
+(./report4.aux) ) 
 Here is how much of TeX's memory you used:
- 1693 strings out of 493717
- 21138 string characters out of 6150720
+ 1696 strings out of 493717
+ 21173 string characters out of 6150720
  87521 words of memory out of 5000000
- 5241 multiletter control sequences out of 15000+600000
+ 5244 multiletter control sequences out of 15000+600000
  16667 words of font info for 65 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  27i,14n,24p,239b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report4.dvi (10 pages, 21928 bytes).
+Output written on report4.dvi (11 pages, 26536 bytes).

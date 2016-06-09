@@ -131,12 +131,20 @@ Assignment(2016/06/03)\
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \section{IP-D制御}
 %%%%%%%%%%%%%%%%%%%%%%%%%
-本節ではをIPD制御によるDCモータの速度制御系を設計する．
+本節ではをIP-D制御によるDCモータの速度制御系を設計する．
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{IP-D制御の原理}
 %%%%%%%%%%%%%%%%%%%%%%%%%
-はじめにIP-D制御の原理について説明する．図\ref{fig:IPD_b}にIP-D制御系の
+はじめにIP-D制御の原理について説明する．一般的なPID制御系の構造は直列補
+償型であるのに対してIP-D制御系の構造は
+直列補償＋フィードバック補償型である．PID制御系に目標値として
+ステップ関数が入力されたとき，制御入力$u$は微分要素によってデルタ関数を
+含む形になる．これは微分キックと呼ばれ，システム機器が危険な状態になる可
+能性がある．これを避けるためにPIDコントローラの微分要素をフィードバッ
+クパスに移動させた制御系をPI-D制御系と呼ぶ．さらに，ステップ状の制御入力
+を妨げるために比例要素をフィードバックパスに移動させた制御系が本節で取り
+扱うでIP-D制御系である．図\ref{fig:IPD_b}にIP-D制御系の
 ブロック線図を示す．
 %
 \begin{figure}[tbp]
@@ -147,7 +155,13 @@ Assignment(2016/06/03)\
  \label{fig:IPD_b}
 \end{figure}
 %
-
+ここで，
+%
+\begin{equation}
+ \frac{K_i}{s} = \frac{K_p}{T_is} \ \ , \ \ F(s) = K_p(1+T_d s)
+\end{equation}
+%
+とおくと，図\ref{fig:IPD_b}は図\ref{fig:IPD_a}のように表せる．
 %
 \begin{figure}[tbp]
   \begin{center} 
@@ -167,8 +181,44 @@ Assignment(2016/06/03)\
   \label{fig:IPD}
 \end{figure}
 %
-
-
+図\ref{fig:IPD_r}に示すようなIP-D制御系の伝達関数と等しい$R_M(s)$を決定
+する．伝達関数が3次系であるとすると$R_M(s)$は，
+%
+\begin{equation}\label{equ:R_M}
+ R_M(s) = \frac{1}{\alpha_0+\alpha_1\sigma s+\alpha_2 (\sigma s)^2+\alpha_3(\sigma s)^3}
+\end{equation}
+%
+と表現できる．ただし，$\sigma$はタイムスケールを表す．また
+$\left\{\alpha_0,\alpha_1,\alpha_2,\alpha_3\right\}=\left\{1,1,0.5,0.15\right\}$と北森は推薦してい
+る．ここで図\ref{fig:IPD_a}より$R(s),Y(s)$の関係を求めると，
+%
+\begin{equation}
+ Y(s) = P(s)\left\{\frac{K_i}{s}(R(s)-Y(s))-F(s)Y(s) \right\}
+\end{equation}
+%
+となる．すると伝達関数$T(s)$，
+%
+\begin{equation}
+ T(s) = \frac{Y(s)}{R(s)} =
+  \frac{\frac{K_i}{s}P(s)}{1+P(s)\Bigl(\frac{K_i}{s}+F(s)\Bigr)} =  \frac{1}{1+\frac{s}{K_i}\Bigl(\frac{1}{P(s)}+F(s)\Bigr)}
+\end{equation}
+%
+を得る．ここでプラント$P(s)$が２次系で
+%
+\begin{equation}
+ P(s) = \frac{1}{\beta (s)} = \frac{1}{\beta_0 + \beta_1 s + \beta_2 s^2}
+\end{equation}
+%
+と表現されるとき，(\ref{equ:R_M})式のパラメータは以下の等式より決定できる．
+%
+\begin{eqnarray}
+ T(s) & = & R_M(s) \nonumber \\
+ \frac{1}{1+\frac{s}{K_i}\Bigl(\beta_0 + \beta_1 s + \beta_2 s^2 +
+  K_p+K_p T_d s \Bigr)} & = & \frac{1}{\alpha_0+\alpha_1\sigma
+  s+\alpha_2 (\sigma s)^2+\alpha_3(\sigma s)^3} \nonumber \\
+ \frac{1}{1+\frac{\beta_0 + K_p}{K_i}s+\frac{K_pT_d+_beta_1}{K_i}s^2+\frac{\beta_2}{K_i}s^3}& = & \frac{1}{\alpha_0+\alpha_1\sigma s+\alpha_2 (\sigma s)^2+\alpha_3(\sigma s)^3}
+\end{eqnarray}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{IP-D制御による制御系の設計}
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -266,7 +316,7 @@ Y(s) = P(s)Q(s)R(s) = P(s)P^{-1}(s)R(s) =R(s)
   \begin{center} 
   \subfigure[IMC]{
     \includegraphics[width = 80 mm]{fig/IMC_a.eps}
-     \label{fig:IMC_b}
+     \label{fig:IMC_a}
   }
   %
   \hfill

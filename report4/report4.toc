@@ -2,11 +2,11 @@
 \contentsline {section}{\numberline {2}DCモータの特性}{1}
 \contentsline {section}{\numberline {3}IP-D制御}{2}
 \contentsline {subsection}{\numberline {3.1}IP-D制御の原理}{2}
-\contentsline {subsection}{\numberline {3.2}IP-D制御による制御系の設計}{3}
-\contentsline {subsection}{\numberline {3.3}シミュレーションと考察}{3}
-\contentsline {section}{\numberline {4}IMC(Internal Model Contorl)法}{3}
-\contentsline {subsection}{\numberline {4.1}IMCの原理}{3}
-\contentsline {subsection}{\numberline {4.2}IMC法によるPIDコントローラの設計}{6}
-\contentsline {subsection}{\numberline {4.3}シミュレーションと考察}{7}
-\contentsline {section}{\numberline {5}まとめ}{8}
-\contentsline {section}{参考文献}{8}
+\contentsline {subsection}{\numberline {3.2}IP-D制御による制御系の設計}{4}
+\contentsline {subsection}{\numberline {3.3}シミュレーションと考察}{4}
+\contentsline {section}{\numberline {4}IMC(Internal Model Contorl)法}{4}
+\contentsline {subsection}{\numberline {4.1}IMCの原理}{4}
+\contentsline {subsection}{\numberline {4.2}IMC法によるPIDコントローラの設計}{7}
+\contentsline {subsection}{\numberline {4.3}シミュレーションと考察}{8}
+\contentsline {section}{\numberline {5}まとめ}{9}
+\contentsline {section}{参考文献}{9}
