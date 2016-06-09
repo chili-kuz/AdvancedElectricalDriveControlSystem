@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (utf8.euc) (TeX Live 2015) (preloaded format=platex 2016.5.23)  9 JUN 2016 20:27
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (utf8.euc) (TeX Live 2015) (preloaded format=platex 2016.5.23)  10 JUN 2016 06:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -195,19 +195,25 @@ File: fig/IPD_r.eps Graphic file (type eps)
 File: fig/IPDr.eps Graphic file (type eps)
  <fig/IPDr.eps> [4]
 File: fig/IPD_com.eps Graphic file (type eps)
- <fig/IPD_com.eps> [5] [6]
+ <fig/IPD_com.eps>
+File: fig/IPD_TL.eps Graphic file (type eps)
+ <fig/IPD_TL.eps> [5]
+
+LaTeX Warning: Text page 6 contains only floats.
+
+[6]
 File: fig/FF.eps Graphic file (type eps)
  <fig/FF.eps>
 File: fig/IMC.eps Graphic file (type eps)
  <fig/IMC.eps>
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 339.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 347.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 339.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 347.
  [7]
 File: fig/IMC_a.eps Graphic file (type eps)
 
@@ -226,12 +232,12 @@ LaTeX Warning: Text page 11 contains only floats.
 
 [11] [12] [13] (./report4.aux) ) 
 Here is how much of TeX's memory you used:
- 1711 strings out of 493717
- 21353 string characters out of 6150720
+ 1714 strings out of 493717
+ 21389 string characters out of 6150720
  85521 words of memory out of 5000000
- 5255 multiletter control sequences out of 15000+600000
+ 5257 multiletter control sequences out of 15000+600000
  16667 words of font info for 65 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  27i,14n,24p,239b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report4.dvi (15 pages, 31604 bytes).
+Output written on report4.dvi (15 pages, 31852 bytes).

@@ -279,7 +279,15 @@ MATLAB/simulinkでシミュレーションを行った．DCモータをI-PD制�
  \label{fig:IPD_com}
 \end{figure}
 %
-
+%
+\begin{figure}[tbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/IPD_TL.eps}
+ \end{center}
+ \caption{I-PD制御したときのステップ応答と参照モデル$R_M(s)$のステップ応答の比較}
+ \label{fig:IPD_TL}
+\end{figure}
+%
 図\ref{fig:IPDr},\ref{fig:IPD_com}を見ると応答波形が振動していることがわ
 かる．これは係数$\alpha_i$を望ましいステップ応答形状に応じて適宜変更する
 ことで制御可能であると考えられる．
