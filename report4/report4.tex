@@ -114,7 +114,7 @@ Assignment(2016/06/03)\
  \Omega_m(s)=\frac{\frac{1}{K_E}}{\frac{JL_a}{K_{T}K_E}s^2+\frac{JR_a}{K_{T}K_E}s+1}-\frac{\frac{R_{a}+L_{a}s}{K_{T}K_E}}{\frac{JL_a}{K_{T}K_E}s^2+\frac{JR_a}{K_{T}K_E}s+1}T_L
 \end{equation}
 %
-となる．ここで$K_T=K_E$である．(2)式において
+となる．(2)式において
 \begin{eqnarray}
  \begin{cases}
   T = \sqrt{\frac{L_{a}J}{K_{E}K_T}} & \\
@@ -122,16 +122,62 @@ Assignment(2016/06/03)\
   K = \frac{1}{K_E}
  \end{cases}
 \end{eqnarray}
-とおく．すると＊＊から＊＊までの伝達特性は，
+とおく．負荷を含まないDCモータ単体の入出力伝達関数$P(s)$は，
 \begin{equation}\label{equ:plant}
  P(s)=\frac{K}{T^2s^2+2\zeta Ts+1}
 \end{equation}
 となる．
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{IP-D制御}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+本節ではをIPD制御によるDCモータの速度制御系を設計する．
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\section{IP-D}
+\subsection{IP-D制御の原理}
 %%%%%%%%%%%%%%%%%%%%%%%%%
-IP-D
+はじめにIP-D制御の原理について説明する．図\ref{fig:IPD_b}にIP-D制御系の
+ブロック線図を示す．
+%
+\begin{figure}[tbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/IPD_b.eps}
+ \end{center}
+ \caption{IP-D制御系}
+ \label{fig:IPD_b}
+\end{figure}
+%
+
+%
+\begin{figure}[tbp]
+  \begin{center} 
+  \subfigure[IP-D]{
+    \includegraphics[width = 90 mm]{fig/IPD_a.eps}
+     \label{fig:IPD_a}
+  }
+  %
+  \hfill
+  %
+  \subfigure[reference model]{
+   \includegraphics[width = 70mm]{fig/IPD_r.eps}
+    \label{fig:IPD_r}
+  }
+  \end{center}
+  \caption{IP-D制御系の設計}
+  \label{fig:IPD}
+\end{figure}
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{IP-D制御による制御系の設計}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{シミュレーションと考察}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \section{IMC(Internal Model Contorl)法}
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -242,7 +288,7 @@ Y(s) = P(s)Q(s)R(s) = P(s)P^{-1}(s)R(s) =R(s)
 %
 となる．
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{制御系の設計}
+\subsection{IMC法によるPIDコントローラの設計}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 次に，先ほど説明したIMC法を用いてDCモータの速度制御系を設計する．
 ここではノミナルモデルはプラントと等しい，つまり$P(s)=P_{n}(s)$である．
@@ -277,11 +323,40 @@ Y(s) = P(s)Q(s)R(s) = P(s)P^{-1}(s)R(s) =R(s)
   & = & \frac{2\zeta T}{K\lambda}\Bigl(1+\frac{1}{2\zeta Ts}+\frac{T}{2\zeta}s\Bigr)
 \end{eqnarray}
 %
-となる．\ref{equ:C_s}を見ると
-
+となる．(\ref{equ:C_s})式はPIDコントローラの式
+%
+\begin{equation}\label{equ:PID}
+ C_{PID} (s) = K_p \Bigl(1+\frac{1}{T_i s} + T_d s\Bigr)
+\end{equation}
+%
+と等価であるとみなせる．(\ref{equ:C_s}),(\ref{equ:PID})式を係数比較する
+ことによって，
+%
+\begin{equation}\label{equ:gain}
+ K_p =  \frac{2\zeta T}{K\lambda}  \ \  ,  \ \ T_i = 2\zeta T  \ \  , \ \ T_d = \frac{T}{2\zeta}
+\end{equation}
+%
+を得る．$\lambda$の値を任意に3つ決定し，(\ref{equ:gain})式に具体的な値を
+代入したものを表\ref{tab:IMC_para}に示す．
+%
+\begin{table}[tb]
+ \centering
+ \caption{IMC法を用いて決定したPIDパラメータ}
+ \label{tab:IMC_para}
+  \begin{tabular}{c||c|c|c}\hline
+       \        &$K_p$  &$T_i$   &$T_d$\\\hline
+   $\lambda=0.1$&1.765  &0.020761&0.02\\\hline
+   $\lambda=0.2$&0.88235&0.020761&0.02\\\hline
+   $\lambda=0.5$&0.35294&0.020761&0.02\\\hline
+ \end{tabular}
+\end{table}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{シミュレーション}
+\subsection{シミュレーションと考察}
 %%%%%%%%%%%%%%%%%%%%%%%%%
+IMC法を用いて決定したPIDコントローラを用いてDCモータの速度制御系を構成し，
+MATLAB/simulinkでシミュレーションを行った．このときのシミュレーション結
+果を図\ref{fig:IMC_result}に示す．ただし，目標値は500[rpm]とした．
 %
 \begin{figure}[tbp]
  \begin{center}
@@ -291,9 +366,37 @@ Y(s) = P(s)Q(s)R(s) = P(s)P^{-1}(s)R(s) =R(s)
  \label{fig:IMC_result}
 \end{figure}
 %
-
-目標を達するのは早いがトルクは？
+図\ref{fig:IMC_result}を見ると$\lambda$の値が小さければ小さいほど早く目標値
+に収束していることがわかる．即応性を高くするにはIMCフィルタの$\lambda$を
+小さくすれば良いと考えられる．しかし，早く目標値に収束するためには，大きなトルク
+を出力しなければならないので，出力トルクがモータの定格トルクを超え，モータが破壊しな
+いように適切に$\lambda$を設定する必要があると考えられる．また，IMC法はプ
+ラントのモデルの同定精度によって大きく制御系の性能が変わってくる．プラン
+トのモデルを精度よく同定さえすればIMCフィルタの$\lambda$を調節すれば良い
+ので制御系を容易に構成できると考えられる．
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \section{まとめ}
 %%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+\begin{thebibliography}{99}
+\addcontentsline{toc}{section}{参考文献}
+
+ \bibitem{denki} T.Sakamoto,
+		 "Lecture Notes of Advanced Electrical Drive Control System",
+		 2016．
+
+ \bibitem{mecha} 坂本哲三，"電気機器の電気力学と制御", 森北出版, 2007．
+
+ \bibitem{wakaru} 川田昌克，西岡勝博，"MATLAB/Simulinkによるわかりやすい
+		 制御工学", 森北出版, 2001．
+
+ \bibitem{kitamori} 北森俊行，"最適な制御系設計法と各種制御方式
+		 の基礎・理論・応用の実際"，アイ・エヌ・ジー，1993．
+
+\bibitem{jiten} 足立修一ら，"制御の事典"，朝倉書店，2015．
+		 
+\end{thebibliography}
+
 \end{document}
