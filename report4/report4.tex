@@ -129,29 +129,29 @@ Assignment(2016/06/03)\
 となる．
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\section{IP-D制御}
+\section{I-PD制御}
 %%%%%%%%%%%%%%%%%%%%%%%%%
-本節ではをIP-D制御によるDCモータの速度制御系を設計する．
+本節ではをI-PD制御によるDCモータの速度制御系を設計する．
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{IP-D制御の原理}
+\subsection{I-PD制御の原理}
 %%%%%%%%%%%%%%%%%%%%%%%%%
-はじめにIP-D制御の原理について説明する．一般的なPID制御系の構造は直列補
-償型であるのに対してIP-D制御系の構造は
+はじめにI-PD制御の原理について説明する．一般的なPID制御系の構造は直列補
+償型であるのに対してI-PD制御系の構造は
 直列補償＋フィードバック補償型である．PID制御系に目標値として
 ステップ関数が入力されたとき，制御入力$u$は微分要素によってデルタ関数を
 含む形になる．これは微分キックと呼ばれ，システム機器が危険な状態になる可
 能性がある．これを避けるためにPIDコントローラの微分要素をフィードバッ
 クパスに移動させた制御系をPI-D制御系と呼ぶ．さらに，ステップ状の制御入力
 を妨げるために比例要素をフィードバックパスに移動させた制御系が本節で取り
-扱うでIP-D制御系である．図\ref{fig:IPD_b}にIP-D制御系の
+扱うでI-PD制御系である．図\ref{fig:IPD_b}にI-PD制御系の
 ブロック線図を示す．
 %
-\begin{figure}[tbp]
+\begin{figure}[bp]
  \begin{center}
   \includegraphics[width = 150mm]{fig/IPD_b.eps}
  \end{center}
- \caption{IP-D制御系}
+ \caption{I-PD制御系}
  \label{fig:IPD_b}
 \end{figure}
 %
@@ -177,18 +177,18 @@ Assignment(2016/06/03)\
     \label{fig:IPD_r}
   }
   \end{center}
-  \caption{IP-D制御系の設計}
+  \caption{I-PD制御系の設計}
   \label{fig:IPD}
 \end{figure}
 %
-図\ref{fig:IPD_r}に示すようなIP-D制御系の伝達関数と等しい$R_M(s)$を決定
-する．伝達関数が3次系であるとすると$R_M(s)$は，
+図\ref{fig:IPD_r}に示すようなI-PD制御系の伝達関数と等しい参照モデル$R_M(s)$を決定
+する．3次系の$R_M(s)$は，
 %
 \begin{equation}\label{equ:R_M}
  R_M(s) = \frac{1}{\alpha_0+\alpha_1\sigma s+\alpha_2 (\sigma s)^2+\alpha_3(\sigma s)^3}
 \end{equation}
 %
-と表現できる．ただし，$\sigma$はタイムスケールを表す．また
+と表現できる．ただし，$\sigma$はタイムスケールを表す．また，
 $\left\{\alpha_0,\alpha_1,\alpha_2,\alpha_3\right\}=\left\{1,1,0.5,0.15\right\}$と北森は推薦してい
 る．ここで図\ref{fig:IPD_a}より$R(s),Y(s)$の関係を求めると，
 %
@@ -205,31 +205,89 @@ $\left\{\alpha_0,\alpha_1,\alpha_2,\alpha_3\right\}=\left\{1,1,0.5,0.15\right\}$
 %
 を得る．ここでプラント$P(s)$が２次系で
 %
-\begin{equation}
+\begin{equation}\label{equ:beta}
  P(s) = \frac{1}{\beta (s)} = \frac{1}{\beta_0 + \beta_1 s + \beta_2 s^2}
 \end{equation}
 %
-と表現されるとき，IP-Dコントローラのパラメータは，
+と表現されるとき，I-PDコントローラのパラメータは，
 %
 \begin{eqnarray}
  T(s) & = & R_M(s) \nonumber \\
  \frac{1}{1+\frac{s}{K_i}\Bigl(\beta_0 + \beta_1 s + \beta_2 s^2 +
   K_p+K_p T_d s \Bigr)} & = & \frac{1}{\alpha_0+\alpha_1\sigma
   s+\alpha_2 (\sigma s)^2+\alpha_3(\sigma s)^3} \nonumber \\
- \frac{1}{1+\frac{\beta_0 + K_p}{K_i}s+\frac{K_pT_d+_beta_1}{K_i}s^2+\frac{\beta_2}{K_i}s^3}& = & \frac{1}{\alpha_0+\alpha_1\sigma s+\alpha_2 (\sigma s)^2+\alpha_3(\sigma s)^3}
+ \frac{1}{1+\frac{\beta_0 + K_p}{K_i}s+\frac{K_pT_d+_beta_1}{K_i}s^2+\frac{\beta_2}{K_i}s^3}& = & \frac{1}{\alpha_0+\alpha_1\sigma s+\alpha_2 (\sigma s)^2+\alpha_3(\sigma s)^3}\label{equ:equal}
 \end{eqnarray}
 %
 より決定できる．
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{IP-D制御による制御系の設計}
+\subsection{I-PD制御による制御系の設計}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 次に，先ほど説明したIP-D制御を用いてDCモータの速度制御系を設計する．
-
+はじめに，参照モデル$R_M(s)$中の$\sigma=1,2,3$としたときの場合のステップ
+応答を図\ref{fig:IPDr}に示す．ただし，$\alpha_i(i=9,1,2,3)$は北森の推薦
+する
+$\left\{\alpha_0,\alpha_1,\alpha_2,\alpha_3\right\}=\left\{1,1,0.5,0.15\right\}$
+を用いた．
+%
+\begin{figure}[tbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/IPDr.eps}
+ \end{center}
+ \caption{参照モデル$R_M(s)$のステップ応答}
+ \label{fig:IPDr}
+\end{figure}
+%
+図\ref{fig:IPDr}より，＊＊＊＊＊＊＊＊であるから$\sigma=1$を採用した．
+次に，(\ref{equ:beta})式の$\beta_i(i=0,1,2)$を具体的に計算すると，
+%
+\begin{eqnarray}
+ \begin{cases}
+  \beta_0  =  \frac{1}{K} = K_E = 8.50 \\
+  \beta_1  =  \frac{2\zeta T}{K} = \frac{R_a J}{K_T} = \frac{3}{17} \\
+  \beta_2  =  \frac{T^2}{K} = \frac{L_a J}{K_T} = \frac{3}{850}
+ \end{cases}
+\end{eqnarray}
+%
+となる．これらを(\ref{equ:equal})式に代入し，係数比較すると，コントロー
+ラのパラメータである
+%
+\begin{eqnarray}
+ \begin{cases}
+  K_p = -\frac{1441}{170} \\
+  T_d = \frac{28}{1441} \\
+  K_i = \frac{2}{85}
+ \end{cases}
+\end{eqnarray}
+%
+を得る．
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{シミュレーションと考察}
 %%%%%%%%%%%%%%%%%%%%%%%%%
+I-PD制御を用いたDCモータの速度制御系を構成し，
+MATLAB/simulinkでシミュレーションを行った．DCモータをI-PD制御したときのステップ応
+答と参照モデル$R_M(s)$のステップ応答の比較をしたものを図
+\ref{fig:IPD_com}に示す．
+%
+\begin{figure}[tbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/IPD_com.eps}
+ \end{center}
+ \caption{I-PD制御したときのステップ応答と参照モデル$R_M(s)$のステップ応答の比較}
+ \label{fig:IPD_com}
+\end{figure}
+%
 
+図\ref{fig:IPDr},\ref{fig:IPD_com}を見ると応答波形が振動していることがわ
+かる．これは係数$\alpha_i$を望ましいステップ応答形状に応じて適宜変更する
+ことで制御可能であると考えられる．
+%
+I-PD制御系の特徴としてPID制御系より目標値への追従が遅い，また，速応性を上げ
+過ぎると制御系が不安定になる場合があることが挙げられる．
+
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \section{IMC(Internal Model Contorl)法}
@@ -242,7 +300,7 @@ $\left\{\alpha_0,\alpha_1,\alpha_2,\alpha_3\right\}=\left\{1,1,0.5,0.15\right\}$
 %%%%%%%%%%%%%%%%%%%%%%%%%
 まず，IMC法の原理について説明する．
 %
-\begin{figure}[tbp]
+\begin{figure}[bp]
  \begin{center}
   \includegraphics[width = 80mm]{fig/FF.eps}
  \end{center}
@@ -409,7 +467,10 @@ Y(s) = P(s)Q(s)R(s) = P(s)P^{-1}(s)R(s) =R(s)
 %%%%%%%%%%%%%%%%%%%%%%%%%
 IMC法を用いて決定したPIDコントローラを用いてDCモータの速度制御系を構成し，
 MATLAB/simulinkでシミュレーションを行った．このときのシミュレーション結
-果を図\ref{fig:IMC_result}に示す．ただし，目標値は500[rpm]とした．
+果を図\ref{fig:IMC_result}に示す．また，負荷トルク$T_L$を考慮したシミュレーション
+したものを図\ref{fig:IMC_TL}に示す．ただし，目標値は500[rpm]とし，負荷ト
+ルクしてトルク定数に電機子電流（$i_a = P/v$）を掛けた値
+$T_L=2833.3[\rm{Nm}]$を与えた．
 %
 \begin{figure}[tbp]
  \begin{center}
@@ -417,6 +478,24 @@ MATLAB/simulinkでシミュレーションを行った．このときのシミ�
  \end{center}
  \caption{IMC法で$\lambda=0.1,0.2,0.5$として設計したシステムのステップ応答}
  \label{fig:IMC_result}
+\end{figure}
+%
+%
+\begin{figure}[tbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/IMC_TL.eps}
+ \end{center}
+ \caption{IMCフィルタの係数$\lambda=0.1$としたときのステップ応答(負荷トルク$T_L=2833.3$)}
+ \label{fig:IMC_TL}
+\end{figure}
+%
+%
+\begin{figure}[tbp]
+ \begin{center}
+  \includegraphics[width = 150mm]{fig/IMC_TLb.eps}
+ \end{center}
+ \caption{図\ref{fig:IMC_TL}の拡大図}
+ \label{fig:IMC_TLb}
 \end{figure}
 %
 図\ref{fig:IMC_result}を見ると$\lambda$の値が小さければ小さいほど早く目標値
@@ -449,6 +528,9 @@ I-PD制御，内部モデル制御を用いてDCモータの速度制御系を�
 		 の基礎・理論・応用の実際"，アイ・エヌ・ジー，1993．
 
 \bibitem{jiten} 足立修一ら，"制御の事典"，朝倉書店，2015．
+
+ \bibitem{kitamoripaper} 北森俊行，"IP-D制御方式の原理と設計法"，システ
+		 ム/制御/情報，Vol.42，No.1，pp.7-17，1998．
 		 
 \end{thebibliography}
 

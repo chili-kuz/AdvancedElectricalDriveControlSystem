@@ -1,9 +1,9 @@
 # Fdb version 3
-["dvipdf"] 1465437776 "report4.dvi" "report4.pdf" "report4" 1465437778
-  "report4.dvi" 1465437776 26796 f6448c8227e5d148c14ec4c548a3c4ad "latex"
+["dvipdf"] 1465471625 "report4.dvi" "report4.pdf" "report4" 1465471628
+  "report4.dvi" 1465471625 31604 84995f3329a64eb8e533cd5cc4f77dc6 "latex"
   (generated)
   "report4.pdf"
-["latex"] 1465437776 "report4.tex" "report4.dvi" "report4" 1465437778
+["latex"] 1465471625 "report4.tex" "report4.dvi" "report4" 1465471628
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty" 1335995445 8253 3bdedc8409aa5d290a2339be6f09af03 ""
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty" 1335995445 18425 775b341047ce304520cc7c11ca41392e ""
   "/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsbsy.sty" 1456875012 2210 5c54ab129b848a5071554186d0168766 ""
@@ -26,17 +26,21 @@
   "fig/DC_model.eps" 1463531551 47192 0a6dbf4a8171b0c3820f8315a47b100f ""
   "fig/FF.eps" 1465345820 49340 a3b1641e2271993245a267956ed19000 ""
   "fig/IMC.eps" 1465346634 67183 2fe3b751a656169e45161644ed8f8af9 ""
+  "fig/IMC_TL.eps" 1465471131 12416 d592841e587f3ac9991c7aa394e4d29d ""
+  "fig/IMC_TLb.eps" 1465471308 10815 8b73c99d473adfc50f9f4bfbd183b8d0 ""
   "fig/IMC_a.eps" 1465363777 54586 1f0d354a7d509204de671a46dd6278b1 ""
   "fig/IMC_b.eps" 1465362574 59821 6c47d1530f9317e5c85000fb1ec4ab23 ""
   "fig/IMC_result.eps" 1465342941 15800 a047d2c6827e514eaefed5ca7bb23aa6 ""
   "fig/IPD_a.eps" 1465429729 49865 58067e922aa401c130690c5b025f1165 ""
   "fig/IPD_b.eps" 1465429215 74710 73a2c381e4d39c26fb64c2e1887d7c65 ""
+  "fig/IPD_com.eps" 1465455438 24247 22e9e9a2983c7c8ba998a9dd408fa99c ""
   "fig/IPD_r.eps" 1465429447 31050 fc9e9627757683d1008fb92a3f6c7286 ""
-  "report4.aux" 1465437776 3255 484955882593cb1319582a00b2df7e36 ""
-  "report4.tex" 1465437775 16817 0a85892d2b557ac8ff23f753fb2871ac ""
-  "report4.toc" 1465437776 809 89bef8a0be28e0def2569a6b4c30645d ""
+  "fig/IPDr.eps" 1465448478 12734 41d2c8c5a27306167aec6f7e7be741b0 ""
+  "report4.aux" 1465471625 4055 844aed5c654c3fb2a536a54428b8e4ec ""
+  "report4.tex" 1465471573 19832 cb7ba9444c7cb2489925f471249ed37f ""
+  "report4.toc" 1465471625 812 4744bf6fddbcef9f71ab952d4595be37 ""
   (generated)
-  "report4.toc"
   "report4.aux"
-  "report4.dvi"
   "report4.log"
+  "report4.dvi"
+  "report4.toc"
